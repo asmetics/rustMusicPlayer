@@ -1,0 +1,83 @@
+import { Button, VerticalBox, GridBox, LineEdit, Slider } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    in-out property <int> counter: 42;
+    callback request-increase-value();
+
+    GridLayout {
+        padding: 25px;
+        spacing: 15px;
+
+        Row{
+            Text {
+                text: "Rust Music Player";
+                horizontal-alignment: center;
+                font-size: 45px;
+            }
+        }
+
+        Row{
+            Button {
+                text: "Home";
+                width: 150px;
+            }
+        }
+
+        Row{
+            Button {
+                text: "Libary";
+                width: 150px;
+            }
+        }
+
+        Row{
+            HorizontalLayout {
+                alignment: center;
+                Button {
+                    text: "Back";
+                    width: 200px;
+                }
+                Button {
+                    text: "Play";
+                    width: 200px;
+                }
+                Button {
+                    text: "Next";
+                    width: 200px;
+                }
+            }
+        }
+
+
+        Row {
+
+            HorizontalLayout {
+                padding: 50px;
+                Text{
+                    horizontal-alignment: center;
+                    text: "00:00";
+                    font-size: 18px;
+                    font-weight: 100;
+                }
+
+                Slider {
+                    width: 800px;
+                    height: 15px;
+                    value: 0;
+                }
+
+                Text{
+                    horizontal-alignment: center;
+                    text: "00:00";
+                    font-size: 18px;
+                    font-weight: 100;
+                }
+
+            }
+        }
+
+
+    }
+
+
+}
