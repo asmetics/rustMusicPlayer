@@ -1,4 +1,4 @@
-import { Button, VerticalBox, GridBox, LineEdit, Slider } from "std-widgets.slint";
+import { Button, VerticalBox, GridBox, LineEdit, Slider, ScrollView } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     in-out property <int> counter: 42;
@@ -16,17 +16,41 @@ export component AppWindow inherits Window {
             }
         }
 
-        Row{
-            Button {
-                text: "Home";
-                width: 150px;
+        HorizontalLayout {
+            VerticalBox {
+                alignment: start;
+                    Button {
+                        text: "Home";
+                        width: 150px;
+                    }
+        
+                    Button {
+                        text: "Libary";
+                        width: 150px;
+                    }
             }
-        }
-
-        Row{
-            Button {
-                text: "Libary";
-                width: 150px;
+    
+            ScrollView {
+                width: 400px;
+                height: 250px;
+                
+                Rectangle {
+                    width: 100%;  
+                    height: 100%; 
+                    background: Colors.darkgrey;
+                }
+                
+                VerticalLayout {
+                    alignment: center;
+                    Text {
+                        text: "About This Project";
+                        font-size: 20px;
+                    }
+                    
+                    Text {
+                        text: "This project was made as a school project, written in Rust and Slint. In this project I studied Rust and how it can be used.";
+                    }
+                }
             }
         }
 
@@ -47,7 +71,6 @@ export component AppWindow inherits Window {
                 }
             }
         }
-
 
         Row {
 
@@ -75,9 +98,5 @@ export component AppWindow inherits Window {
 
             }
         }
-
-
     }
-
-
 }
