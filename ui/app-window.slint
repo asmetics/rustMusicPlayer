@@ -1,16 +1,19 @@
 import { Button, VerticalBox, GridBox, LineEdit, Slider, ScrollView } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
-    in-out property <int> counter: 42;
-    callback request-increase-value();
+    property<bool> is_home_page: true; 
+
+    callback home-clicked();
+    callback library-clicked();
 
     GridLayout {
         padding: 25px;
         spacing: 15px;
 
-        Row{
+        Row {
             Text {
                 text: "Rust Music Player";
+                font-family: "Calibri";
                 horizontal-alignment: center;
                 font-size: 45px;
             }
@@ -19,83 +22,52 @@ export component AppWindow inherits Window {
         HorizontalLayout {
             VerticalBox {
                 alignment: start;
-                    Button {
-                        text: "Home";
-                        width: 150px;
+                Button {
+                    text: "Home";
+                    width: 150px;
+                    clicked => {
+                        root.is_home_page = true;
+                        root.home-clicked();
                     }
-        
-                    Button {
-                        text: "Libary";
-                        width: 150px;
-                    }
-            }
-    
-            ScrollView {
-                width: 400px;
-                height: 250px;
-                
-                Rectangle {
-                    width: 100%;  
-                    height: 100%; 
-                    background: Colors.darkgrey;
                 }
-                
+
+                Button {
+                    text: "Library";
+                    width: 150px;
+                    clicked => {
+                        root.is_home_page = false;
+                        root.library-clicked();
+                    }
+                }
+            }
+
+            ScrollView {
+                width: 700px;
+                height: 350px;
+
+                Rectangle {
+                    width: 100%;
+                    height: 100%;
+                    background: #212121;
+                }
+
                 VerticalLayout {
-                    alignment: center;
+                    alignment: start;
+                    padding: 15px;
+                    // Show the home page content if is_home_page is true
                     Text {
-                        text: "About This Project";
-                        font-size: 20px;
+                        text: "Home Page";
+                        font-size: 30px;
+                        visible: root.is_home_page;
                     }
                     
+                    // Show the library page content if is_home_page is false
                     Text {
-                        text: "This project was made as a school project, written in Rust and Slint. In this project I studied Rust and how it can be used.";
+                        text: "Library Page";
+                        font-size: 30px;
+                        visible: !root.is_home_page;
                     }
                 }
-            }
-        }
-
-        Row{
-            HorizontalLayout {
-                alignment: center;
-                Button {
-                    text: "Back";
-                    width: 100px;
-                }
-                Button {
-                    text: "Play";
-                    width: 100px;
-                }
-                Button {
-                    text: "Next";
-                    width: 100px;
-                }
-            }
-        }
-
-        Row {
-
-            HorizontalLayout {
-                spacing: 20px;
-                Text{
-                    horizontal-alignment: center;
-                    text: "00:00";
-                    font-size: 18px;
-                    font-weight: 100;
-                }
-
-                Slider {
-                    width: 800px;
-                    height: 15px;
-                    value: 0;
-                }
-
-                Text{
-                    horizontal-alignment: center;
-                    text: "00:00";
-                    font-size: 18px;
-                    font-weight: 100;
-                }
-
             }
         }
     }
